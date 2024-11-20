@@ -261,6 +261,7 @@ def parse_and_add_documents():
         }
     }), 201
 with app.app_context():
+    db.create_all()
     process_documents_on_launch()
 
 if __name__ == '__main__':
