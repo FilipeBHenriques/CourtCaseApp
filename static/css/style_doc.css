@@ -1,0 +1,133 @@
+/* Basic Body and Table Styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f4f4f4;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+/* Table Data Styles */
+#metadata-table td {
+    word-wrap: break-word; /* Allow words to break within cells */
+    white-space: normal; /* Allow text to wrap */
+}
+
+/* Sumário (Main Content) Area */
+#cleaned-summary {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border: 1px solid #ddd;
+    white-space: pre-wrap; /* Preserve line breaks */
+    word-wrap: break-word; /* Allow wrapping of long text */
+    font-family: 'Courier New', Courier, monospace;
+    max-width: 100%;
+    overflow-wrap: break-word;
+}
+
+/* Styling for Specific Columns (Descritores) */
+#metadata-table td:nth-child(6) {
+    white-space: normal; /* Allow wrapping text in the 'Descritores' column */
+    word-wrap: break-word; /* Allow word break in the 'Descritores' column */
+}
+
+/* Trash Can Button Styling */
+button.delete-btn {
+    background-color: transparent;
+    color: #ff4d4d;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 8px;
+}
+
+button.delete-btn:hover {
+    background-color: #f1f1f1;
+    color: #e63939;
+}
+
+button.delete-btn:focus {
+    outline: none;
+}
+
+/* Button Icon Style (Trash Can) */
+button.delete-btn i {
+    font-size: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    table, th, td {
+        font-size: 14px;
+    }
+
+    #metadata-table td {
+        padding: 8px;
+    }
+}
+#back-button {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #f2f2f2; /* Blue background */
+    color: black;
+    border: none;
+    padding: 10px 15px;
+    font-size: 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Slight shadow for depth */
+    transition: background-color 0.3s ease;
+}
+
+#back-button:hover {
+    background-color: #b7b7b7; /* Darker blue on hover */
+}
+
+#back-button i {
+    font-size: 18px; /* Set the size of the arrow */
+    margin-right: 10px; /* Space between the arrow and the text */
+}
+
+
+/* Reset link styles and enforce orange color for all states */
+a {
+    color: #ff6600 !important; /* Force orange color */
+    text-decoration: none; /* Remove underline */
+    font-weight: bold; /* Make the text bold */
+}
+
+a:hover {
+    color: #e65c00 !important; /* Slightly darker orange on hover */
+    text-decoration: underline; /* Optional: Add underline on hover */
+}
+
+a:visited {
+    color: #ff6600 !important; /* Ensure visited links are also orange */
+}
+
+a:active {
+    color: #e65c00 !important; /* Active (clicked) links also darker orange */
+}

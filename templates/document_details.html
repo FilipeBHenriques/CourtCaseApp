@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="static/css/style_doc.css">
+    <title>Document Details</title>
+</head>
+<body>
+
+    <button id="back-button" onclick="window.history.back()">
+        <i>&#8592;</i> Back
+    </button>
+    <h1 id="document-title">Document Details</h1>
+    
+    <table border="1" id="metadata-table">
+        <thead>
+            <tr>
+                <th>Processo</th>
+                <th>Relator</th>
+                <th>Tribunal</th>
+                <th>Decisão</th>
+                <th>Data</th>
+                <th>Descritores</th>
+                <th>Sumário</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Metadata will be inserted here by JavaScript -->
+        </tbody>
+    </table>
+
+    <h2>Full Report</h2>
+    <pre id="cleaned-summary">Loading...</pre> <!-- Section to display cleaned summary -->
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            fetchDocumentDetails(); // Run this function once the document is fully loaded
+        });
+
+        // Function to fetch document details by ID and populate the table
+        function fetchDocumentDetails() {
+            const urlParams = new URLSearchParams(window.location.search); // Get the query parameters from the URL
+            const documentId = urlParams.get('id'); // Extract the 'id' parameter
+
+            if (!documentId) {
+                console.error("No document ID provided in the URL.");
+                return;
+            }
+            console.log("Fetching document with ID:", documentId);
+
+            // Fetch document data from your API
+            fetch(`/api/documents/${documentId}`)
+                .then(response => {
+                    console.log('Response Status:', response.status);
+                    if (!response.ok) {
+                        throw new Error(`Failed to fetch document details. Status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log("Document data:", data);
+
+                    if (!data || !data.processo) {
+                        console.error("Invalid document data:", data);
+                        return;
+                    }
+                    // Update Title
+                    const documentTitle = `${data.processo} - Document Details`;
+                    console.log("Setting h1 to:", documentTitle); // Debugging the title
+                    document.getElementById('document-title').textContent = documentTitle; // Set the h1 content
+
+
+                    // Populate metadata table
+                    const tableBody = document.querySelector('#metadata-table tbody');
+                    const row = tableBody.insertRow();
+                    row.innerHTML = `
+                        <td>${data.processo || 'N/A'}</td>
+                        <td>${data.relator || 'N/A'}</td>
+                        <td>${data.tribunal || 'N/A'}</td>
+                        <td>${data.decisao || 'N/A'}</td>
+                        <td>${data.data || 'N/A'}</td>
+                        <td>${data.descritores || 'N/A'}</td>
+                        <td>${data.sumario || 'N/A'}</td>
+                    `;
+
+                    // Clean the main content and display it in the 'Cleaned Summary' section
+                     // Change to 'content' or the correct field for the main text
+                    
+                    document.getElementById('cleaned-summary').innerHTML = data.main_content;
+                })
+                .catch(error => {
+                    console.error('Error fetching document details:', error);
+                    alert('Error fetching document details');
+                });
+        }
+
+       
+    </script>
+</body>
+</html>
