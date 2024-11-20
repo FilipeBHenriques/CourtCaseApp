@@ -33,7 +33,7 @@ The application is built using **Flask** and **Python**, which were selected for
 
 ## Command to Run the Docker Image
 
-To run the Docker image, use the following command:
+To run the Docker image, one would use the following command:
 
 ```bash
 docker run -p 5000:5000 -v /path/to/data:/app/data <docker_image_name>
